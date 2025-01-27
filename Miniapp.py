@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
 import requests
+import os
 
 app = Flask(__name__)
 scheduler = BackgroundScheduler()
@@ -37,4 +38,5 @@ def schedule_reminder():
     return jsonify({"message": f"Recordatorio programado para el {reminder_date}."})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Usa el puerto de Render o 5000 por defecto
+    app.run(host='0.0.0.0', port=port)  # Escucha en 0.0.0.0
