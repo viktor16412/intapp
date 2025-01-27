@@ -6,6 +6,7 @@ import os
 import logging
 from flask_cors import CORS  # Importar CORS
 
+# Inicializar la aplicación Flask
 app = Flask(__name__)
 CORS(app)  # Habilitar CORS para todos los dominios
 
@@ -28,7 +29,8 @@ def send_reminder(chat_id, ticket_number):
     }
     try:
         response = requests.post(url, json=payload)
-        response.raise_for_status()
+        response.raise_for_status()  # Lanza una excepción si la respuesta no es 2xx
+        logger.info(f"Recordatorio enviado correctamente a {chat_id} para el ticket {ticket_number}.")
     except requests.exceptions.RequestException as e:
         logger.error(f"Error al enviar el recordatorio: {e}")
 
@@ -40,8 +42,14 @@ def home():
 # Ruta para programar recordatorios
 @app.route('/api/schedule-reminder', methods=['POST'])
 def schedule_reminder():
+    # Verificar que el Content-Type sea application/json
+    if not request.is_json:
+        logger.error("Content-Type debe ser application/json")
+        return jsonify({"error": "Content-Type debe ser application/json"}), 415
+
     try:
-        data = request.json
+        # Obtener los datos del cuerpo de la solicitud
+        data = request.get_json()
         ticket_number = data['ticketNumber']
         profile_date = datetime.fromisoformat(data['profileDate'])
         chat_id = data['chatId']
@@ -55,7 +63,9 @@ def schedule_reminder():
             args=[chat_id, ticket_number]
         )
 
+        logger.info(f"Recordatorio programado para el {reminder_date}.")
         return jsonify({"message": f"Recordatorio programado para el {reminder_date}."}), 200
+
     except KeyError as e:
         logger.error(f"Falta un campo requerido en la solicitud: {e}")
         return jsonify({"error": f"Falta un campo requerido: {e}"}), 400
@@ -73,6 +83,7 @@ def shutdown_scheduler(exception=None):
         scheduler.shutdown()
         logger.info("Scheduler detenido correctamente.")
 
+# Iniciar la aplicación
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Usa el puerto de Render o 5000 por defecto
     app.run(host='0.0.0.0', port=port)  # Escucha en 0.0.0.0
