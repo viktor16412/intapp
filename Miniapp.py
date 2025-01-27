@@ -6,12 +6,15 @@ import os
 import logging
 
 app = Flask(__name__)
-scheduler = BackgroundScheduler()
-scheduler.start()
 
 # Configura el logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Inicializar el scheduler
+scheduler = BackgroundScheduler()
+scheduler.start()
+logger.info("Scheduler iniciado correctamente.")
 
 # Función para enviar recordatorios
 def send_reminder(chat_id, ticket_number):
@@ -59,7 +62,9 @@ def schedule_reminder():
 # Detener el scheduler cuando la aplicación se detenga
 @app.teardown_appcontext
 def shutdown_scheduler(exception=None):
-    scheduler.shutdown()
+    if scheduler.running:
+        scheduler.shutdown()
+        logger.info("Scheduler detenido correctamente.")
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Usa el puerto de Render o 5000 por defecto
