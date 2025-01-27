@@ -4,8 +4,10 @@ from datetime import datetime, timedelta
 import requests
 import os
 import logging
+from flask_cors import CORS  # Importar CORS
 
 app = Flask(__name__)
+CORS(app)  # Habilitar CORS para todos los dominios
 
 # Configura el logging
 logging.basicConfig(level=logging.INFO)
@@ -18,7 +20,7 @@ logger.info("Scheduler iniciado correctamente.")
 
 # Función para enviar recordatorios
 def send_reminder(chat_id, ticket_number):
-    bot_token = "8144990341:AAEKsS6pLjSOYQIDlGZeuRtUO36N2N8hWLo"
+    bot_token = "8144990341:AAEKsS6pLjSOYQIDlGZeuRtUO36N2N8hWLo"  # Reemplaza con tu token de bot
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     payload = {
         "chat_id": chat_id,

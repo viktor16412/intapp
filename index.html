@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recordatorio de Tickets</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Programar Recordatorio</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Recordatorio de Tickets</h1>
-        <form id="ticketForm">
-            <label for="ticketNumber">Número de Ticket:</label>
-            <input type="text" id="ticketNumber" required>
-            <label for="profileDate">Fecha de Perfilado:</label>
-            <input type="datetime-local" id="profileDate" required>
-            <button type="submit">Programar Recordatorio</button>
-        </form>
-        <p id="message"></p>
-    </div>
+    <h1>Programar Recordatorio</h1>
+    <form id="ticketForm">
+        <label for="ticketNumber">Número de ticket:</label>
+        <input type="text" id="ticketNumber" required>
+
+        <label for="profileDate">Fecha de perfilado:</label>
+        <input type="date" id="profileDate" required>
+
+        <button type="submit" id="submitButton">Programar recordatorio</button>
+    </form>
+
+    <p id="message"></p>
+
     <script src="app.js"></script>
 </body>
 </html>

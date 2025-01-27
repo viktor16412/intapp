@@ -25,6 +25,13 @@ document.getElementById('ticketForm').addEventListener('submit', (e) => {
         return;
     }
 
+    // Log para depuración
+    console.log("Enviando datos:", {
+        ticketNumber,
+        profileDate,
+        chatId,
+    });
+
     // Enviar datos al backend
     fetch('https://intapp-4.onrender.com/api/schedule-reminder', {
         method: 'POST',
@@ -48,6 +55,7 @@ document.getElementById('ticketForm').addEventListener('submit', (e) => {
     })
     .then(data => {
         // Mostrar mensaje de éxito
+        console.log("Respuesta del backend:", data); // Log para depuración
         document.getElementById('message').textContent = data.message;
         document.getElementById('message').style.color = 'green';
     })
