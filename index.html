@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorio de Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Recordatorio de Tickets</h1>
+        <form id="ticketForm">
+            <label for="ticketNumber">Número de Ticket:</label>
+            <input type="text" id="ticketNumber" required>
+            <label for="profileDate">Fecha de Perfilado:</label>
+            <input type="datetime-local" id="profileDate" required>
+            <button type="submit">Programar Recordatorio</button>
+        </form>
+        <p id="message"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
