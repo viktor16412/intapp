@@ -32,6 +32,11 @@ def send_reminder(chat_id, ticket_number):
     except requests.exceptions.RequestException as e:
         logger.error(f"Error al enviar el recordatorio: {e}")
 
+# Ruta raíz
+@app.route('/')
+def home():
+    return "¡Bienvenido a la API de recordatorios!"
+
 # Ruta para programar recordatorios
 @app.route('/api/schedule-reminder', methods=['POST'])
 def schedule_reminder():
