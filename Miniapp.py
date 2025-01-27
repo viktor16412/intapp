@@ -76,6 +76,8 @@ def schedule_reminder():
         logger.error(f"Error inesperado: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
+
+
 # Detener el scheduler cuando la aplicación se detenga
 @app.teardown_appcontext
 def shutdown_scheduler(exception=None):
@@ -85,5 +87,5 @@ def shutdown_scheduler(exception=None):
 
 # Iniciar la aplicación
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Usa el puerto de Render o 5000 por defecto
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)  # Escucha en 0.0.0.0
