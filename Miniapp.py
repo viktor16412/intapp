@@ -24,7 +24,7 @@ def send_reminder(chat_id, ticket_number):
     bot_token = "8144990341:AAEKsS6pLjSOYQIDlGZeuRtUO36N2N8hWLo"  # Reemplaza con tu token de bot
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     payload = {
-        "chat_id": chat_id,
+        "chat_id": 1462654118,
         "text": f"🔔 Recordatorio: El ticket {ticket_number} tiene un recordatorio programado para hoy."
     }
     try:
