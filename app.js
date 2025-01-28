@@ -33,7 +33,7 @@ document.getElementById('ticketForm').addEventListener('submit', (e) => {
     });
 
     // Enviar datos al backend
-    fetch('https://intapp-4.onrender.com/api/schedule-reminder', {
+    fetch('https://intapp-4.onrender.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
